@@ -16,9 +16,10 @@
       "@app": ["./src/app"],
       "@app/*": ["./src/app/*"],
       "@entities/*": ["./src/entities/*"],
+      "@modules/*": ["./src/modules/*"],
       "@pages/*": ["./src/pages/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@widgets/*": ["./src/widgets/*"]
+      "@public/*": ["/*"],
+      "@shared/*": ["./src/shared/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -27,6 +28,6 @@
     "types": ["vite/client", "node"],
     "useDefineForClassFields": true
   },
-  "include": ["src", "types"],
+  "include": ["./.*.js", "./.*.ts", "./*.js", "./*.ts", "./src", "./types"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
