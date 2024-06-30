@@ -12,8 +12,13 @@
     "lint:styles": "stylelint --fix 'src/**/**.{css,style.ts}'",
     "lint:scripts": "eslint . --fix 'src/**/**.{ts,tsx}' --report-unused-disable-directives --max-warnings 0",
     "format": "pnpm lint:styles && pnpm lint:scripts && scripts/postformat.sh",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:dev": "tsc && vite build --mode=dev",
+    "build:stage": "tsc && vite build --mode=stage",
+    "build:main": "tsc && vite build",
+    "preview": "vite preview",
+    "deploy:firebase:dev": "pnpm build:dev && firebase deploy --only hosting:dev",
+    "deploy:firebase:stage": "pnpm build:stage && firebase deploy --only hosting:stage",
+    "deploy:firebase:main": "pnpm build:main && firebase deploy --only hosting:main"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -50,6 +55,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "firebase-tools": "^13.12.0",
     "jsdom": "^24.1.0",
     "postcss": "^8.4.31",
     "postcss-syntax": "^0.36.2",

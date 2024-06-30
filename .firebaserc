@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "template-react-app"
+  },
+  "targets": {
+    "template-react-app": {
+      "hosting": {
+        "main": [
+          "template-react-app-main"
+        ],
+        "stage": [
+          "template-react-app-stage"
+        ],
+        "dev": [
+          "template-react-app-dev"
+        ]
+      }
+    }
+  }
+}
