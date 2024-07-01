@@ -1,4 +1,4 @@
-name: Testing
+name: Deploy
 
 on:
   push:
@@ -78,8 +78,8 @@ jobs:
       - name: Install dependencies
         run: node -v && pnpm -v && pnpm install --frozen-lockfile
 
-#      - name: Testing
-#        run: pnpm test:ci
+      #      - name: Testing
+      #        run: pnpm test:ci
 
       - name: Build
         if: needs.branch.outputs.branch_name == 'dev' || needs.branch.outputs.branch_name == 'stage' || needs.branch.outputs.branch_name == 'main'
@@ -91,29 +91,28 @@ jobs:
         with:
           name: build
           path: dist
-
-  deploy:
-    name: Deploy
-    needs:
-      - branch
-      - build
-
-    if: needs.branch.outputs.branch_name == 'dev' || needs.branch.outputs.branch_name == 'stage' || needs.branch.outputs.branch_name == 'main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download Bundle
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: dist
-
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting:${{ needs.branch.outputs.branch_name }}
-
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+#  deploy:
+#    name: Deploy to Firebase
+#    needs:
+#      - branch
+#      - build
+#
+#    if: needs.branch.outputs.branch_name == 'dev' || needs.branch.outputs.branch_name == 'stage' || needs.branch.outputs.branch_name == 'main'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Download Bundle
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: build
+#          path: dist
+#
+#      - name: Deploy to Firebase
+#        uses: w9jds/firebase-action@master
+#        with:
+#          args: deploy --only hosting:${{ needs.branch.outputs.branch_name }}
+#
+#        env:
+#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
