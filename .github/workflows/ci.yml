@@ -49,12 +49,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20 # - get from package.json: engines.node
           registry-url: 'https://registry.npmjs.org'
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         id: pnpm-install
         with:
@@ -67,7 +67,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
@@ -78,19 +78,17 @@ jobs:
       - name: Install dependencies
         run: node -v && pnpm -v && pnpm install --frozen-lockfile
 
-      #      - name: Testing
-      #        run: pnpm test:ci
-
       - name: Build
         if: needs.branch.outputs.branch_name == 'dev' || needs.branch.outputs.branch_name == 'stage' || needs.branch.outputs.branch_name == 'main'
         run: pnpm build:${{ needs.branch.outputs.branch_name }}
 
       - name: Create Bundle
         if: needs.branch.outputs.branch_name == 'dev' || needs.branch.outputs.branch_name == 'stage' || needs.branch.outputs.branch_name == 'main'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: dist
+
 #  deploy:
 #    name: Deploy to Firebase
 #    needs:

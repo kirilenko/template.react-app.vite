@@ -1,5 +1,7 @@
 # template.react-app.vite
 
+[![Deploy](https://github.com/kirilenko/template.react-app.vite/actions/workflows/ci.yml/badge.svg)](https://github.com/kirilenko/template.react-app.vite/actions/workflows/ci.yml)
+
 This is a template for a React app using Vite.  
 It includes the following:
 
